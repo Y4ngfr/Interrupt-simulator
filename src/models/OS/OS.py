@@ -12,7 +12,7 @@ class OS:
 
     def adicionar_na_fila_de_interrupcoes(self, interrupcao):
         indice = 0
-        while indice < len(self.fila_de_interrupcoes) and self.fila_de_interrupcoes <= interrupcao.prioridade:
+        while indice < len(self.fila_de_interrupcoes) and self.fila_de_interrupcoes[indice].prioridade <= interrupcao.prioridade:
             indice += 1
         self.fila_de_interrupcoes.insert(indice, interrupcao)
 
