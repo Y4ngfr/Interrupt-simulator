@@ -76,7 +76,7 @@ if __name__ == "__main__":
             ######## Imprime interrupção sendo tratada #########
             interrupcao_atual = f"Interrupção - {interrupcao.tipo}"
             painel_interrupcao = Panel(
-                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tempo de Execução:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
+                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tempo de Execução Restante:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
                 title="Tratamento Interrução",
                 border_style="yellow",
                 width=80,
@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
         if(len(os.fila_de_interrupcoes) == 0 and processo.interrompido == True):
             processo.retomar(os.tempo_salvo, os.pc_salvo, os.ponteiro_pilha_salvo)
-            
+
             ######## Imprime contexto do processo #########
             processo_atual = "Processo Principal"
             painel_processo = Panel(
