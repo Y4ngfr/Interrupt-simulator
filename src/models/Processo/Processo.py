@@ -5,6 +5,7 @@ class Processo:
         self.tempo = 0
         self.pc = 0x1000    # program counter
         self.ponteiro_pilha = 0x8000 # stack pointer
+        self.interrompido = False
 
     def executa(self):
         self.tempo += 1
@@ -26,8 +27,10 @@ class Processo:
         self.tempo = 0
         self.pc = 0x1000
         self.ponteiro_pilha = 0x8000
+        self.interrompido = True
 
     def retomar(self, tempo, pc, pilha):
         self.tempo = tempo
         self.pc = pc
         self.ponteiro_pilha = pilha
+        self.interrompido = False
