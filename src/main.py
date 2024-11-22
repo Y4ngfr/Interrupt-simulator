@@ -8,12 +8,13 @@ from rich.panel import Panel
 import random
 import signal
 import time
+import logging
 
 def handle_sigint(signum, frame):
-        print("\nEncerrando sistema...")
+        console.log("\nEncerrando sistema...")
         a = console.export_text(clear=True, styles=False)
         
-        with open(f"./logs/log{time.time().as_integer_ratio()[0]}.txt", "w") as file:
+        with open(f"./logs/log{time.time().as_integer_ratio()[0]}.txt", "w", encoding="UTF-8") as file:
              file.write(a)
         exit(0)
 
@@ -27,7 +28,7 @@ if __name__ == "__main__":
     ######## Imprime contexto do processo #########
     processo_atual = "Processo Principal"
     painel_processo = Panel(
-        f"Executando: [bold green]{processo_atual}[/bold green]\n\n[bold yellow]Tempo de Execução:[/bold yellow] {processo.tempo}\n[bold yellow]PC:[/bold yellow] {hex(processo.pc)}\n[bold yellow]Pilha:[/bold yellow] {hex(processo.ponteiro_pilha)}",
+        f"""Executando: [bold green]{processo_atual}[/bold green]\n\n[bold yellow]Tempo de Execução:[/bold yellow] {processo.tempo}\n[bold yellow]PC:[/bold yellow] {hex(processo.pc)}\n[bold yellow]Pilha:[/bold yellow] {hex(processo.ponteiro_pilha)}""",
         title="Processo Atual",
         border_style="blue",
         width=80,
@@ -42,6 +43,8 @@ if __name__ == "__main__":
     while True:
         chance_de_nova_interrupcao = random.randint(0, 99)
 
+        console.log("Gerando painel...")
+        
         if chance_de_nova_interrupcao < 14:    # 15% de criar uma nova interrupção
             console.log(f"[bold yellow]! Nova interrupção ![/bold yellow]")
             if not processo.interrompido:
@@ -50,7 +53,7 @@ if __name__ == "__main__":
                 processo.interrompe()
 
             OS.adicionar_na_fila_de_interrupcoes(Interrupcao.Interrupcao())
-
+        
         if not processo.interrompido:   # Se não houver interrupções executa normalmente
             processo.executa()
 
@@ -71,9 +74,9 @@ if __name__ == "__main__":
         else:                       # Se houver, tratam-se as interrupções
             interrupcao = OS.fila_de_interrupcoes[0]
             ######## Imprime interrupção sendo tratada #########
-            interrupcao_atual = f"Interrupção - {interrupcao.tipo}"
+            interrupcao_atual = f"Interrupção - {interrupcao.dispositivo}"
             painel_interrupcao = Panel(
-                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tempo de Execução Restante:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
+                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tipo:[/bold red] {interrupcao.tipo["tipo"]}\n[bold red]Ocorrido:[/bold red] {interrupcao.tipo["ocorrido"]}\n[bold red]Tempo de Execução Restante:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
                 title="Tratamento Interrução",
                 border_style="yellow",
                 width=80,
