@@ -1,3 +1,16 @@
+# Sobre
+
+O **Interrupt-simulator** é um simulador de e/s com interrupções em um sistema operacional. A entrada/saída com interrupções é um mecanismo utilizado em sistemas operacionais para gerenciar dispositivos de E/S de forma eficiente, evitando que o processador fique ocioso aguardando a conclusão de operações de entrada ou saída.
+
+O processador solicita uma operação de E/S (como leitura ou gravação) para um dispositivo.
+Em vez de esperar o dispositivo concluir a operação, o processador continua executando outras tarefas. Quando o dispositivo finaliza a operação de E/S, ele gera uma interrupção que notifica o processador. O processador pausa momentaneamente sua tarefa atual, trata a interrupção (processa os dados ou confirma o término da operação) e depois retorna à tarefa anterior.
+
+Esse processo garante:
++ Eficiência.
++ Resposta Rápida.
++ Permite multitarefa.
+
+
 # Pré-requisitos e instalação
 
 O sistema é desenvolvido na linguagem __python__, que pode ser feito o download [aqui](https://www.python.org/downloads/). O simulador pode ser visualizado [aqui](https://github.com/Y4ngfr/Interrupt-simulator)
@@ -23,14 +36,16 @@ python3 src/main.py
 
 A cada passo da simulação, o programa realiza as seguintes operações:
 
-+ Gera um processo.
-+ Executa o processo até a finalização.
++ Cria o processo principal (que estará executando sempre no programa).
 + Enquanto executa, verifica se ocorreu uma interrupção.
-+ Caso ocorra uma interrupção, trata-a e retorna ao fluxo de execução.
++ Caso ocorra uma interrupção, coloca a interrupção na fila de interrupções (de acordo com a prioridade).
++ Salva o contexto do processo principal e o interrompe.
++ Trata as interrupções da fila (é possível que cheguem novas interrupções).
++ Retoma o contexto do processo principal e continua a execução.
 
 # Arquitetura do Sistema
 
-A arquitetura do simulador é composta pelas seguintes classes: ``Interrupcao``, ``OS`` e ``Processo``, cada uma com responsabilidades específicas que contribuem para o funcionamento 
+A arquitetura do simulador é composta pelas seguintes classes: ``Interrupcao``, ``OS`` e ``Processo``, cada uma com responsabilidades específicas que contribuem para o funcionamento do programa.
 
 ## Interrupcao
 
