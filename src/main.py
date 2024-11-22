@@ -43,7 +43,7 @@ if __name__ == "__main__":
     while True:
         chance_de_nova_interrupcao = random.randint(0, 99)
 
-        console.log("Gerando painel...")
+        # console.log("Gerando painel...")
         
         if chance_de_nova_interrupcao < 14:    # 15% de criar uma nova interrupção
             console.log(f"[bold yellow]! Nova interrupção ![/bold yellow]")
@@ -76,7 +76,7 @@ if __name__ == "__main__":
             ######## Imprime interrupção sendo tratada #########
             interrupcao_atual = f"Interrupção - {interrupcao.dispositivo}"
             painel_interrupcao = Panel(
-                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tipo:[/bold red] {interrupcao.tipo["tipo"]}\n[bold red]Ocorrido:[/bold red] {interrupcao.tipo["ocorrido"]}\n[bold red]Tempo de Execução Restante:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
+                f"Tratando [bold yellow]{interrupcao_atual}[/bold yellow]\n\n[bold red]Tipo:[/bold red] {interrupcao.tipo['tipo']}\n[bold red]Ocorrido:[/bold red] {interrupcao.tipo['ocorrido']}\n[bold red]Tempo de Execução Restante:[/bold red] {interrupcao.tempo_execucao}\n[bold red]Prioridade:[/bold red] {interrupcao.prioridade}",
                 title="Tratamento Interrução",
                 border_style="yellow",
                 width=80,
