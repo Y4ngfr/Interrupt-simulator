@@ -18,7 +18,7 @@ class Interrupcao:
             },
             {
                 "dispositivo": "monitor", "prioridade": 3,
-                "acoes": [{"tipo": "saida", "ocorrido":f"Foi mostrado \"{''.join(teclas_precionadas)}\""}]
+                "acoes": [{"tipo": "saida", "ocorrido":f"Foi mostrado \"{''.join(teclas_precionadas)}\"."}]
             },
         ])
         
